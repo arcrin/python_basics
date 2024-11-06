@@ -3,11 +3,14 @@
 from flask import Flask, Response
 import msgpack
 from datetime import datetime
+import pytz
 
 app = Flask(__name__)
 
 # Define a custom type code for datetime
 DATETIME_TYPE = 1
+
+PACIFIC_TIMEZONE = pytz.timezone('America/Los_Angeles')
 
 def custom_ext_decoder(code, data):
     if code == DATETIME_TYPE:
@@ -18,8 +21,10 @@ def custom_ext_decoder(code, data):
 
 def custom_ext_encoder(obj):
     if isinstance(obj, datetime):
-        timestamp = int(obj.timestamp())
-        return msgpack.ExtType(DATETIME_TYPE, timestamp.to_bytes(8, 'big'))
+        local_dt = obj.astimezone(PACIFIC_TIMEZONE)
+        iso_string = local_dt.isoformat()
+        print(f"ISO time string: {iso_string}")
+        return msgpack.ExtType(DATETIME_TYPE, iso_string.encode('utf-8'))
     else:  
         raise TypeError(f"Unsupported type: {type(obj)}")
 
@@ -33,6 +38,8 @@ def get_data():
         "created_at": datetime.now()
     }
     
+    print(data)
+
     # Serialize data with datetime to MessagePack format
     packed_data = msgpack.packb(data, default=custom_ext_encoder)
     print("Serialized packed_data: ", packed_data)

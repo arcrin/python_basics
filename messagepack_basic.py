@@ -35,6 +35,8 @@ data = {
 # Serialize data with custom encoder
 packed_data = msgpack.packb(data, default=custom_ext_encoder)
 
+print(f"Packed data: {packed_data}")
+
 # Deserialize with custom decoder
 data_back = msgpack.unpackb(packed_data, ext_hook=custom_ext_decoder, raw=False)
 
