@@ -140,3 +140,5 @@ Extensibility	        |   Code can be extended and reused in ways not explicitly
 Parallel development	|   Code can be developed in parallel.	                                    |   Valuable in large, complex applications; not so much in small, simple applications.
 Maintainability	        |   Classes with clearly defined responsibilities are easier to maintain.   |   Always valuable.
 Testability	            |   Classes can be unit tested.	                                            |   Always valuable.
+
+- LATE BINDING
