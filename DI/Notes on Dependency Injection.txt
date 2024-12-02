@@ -130,7 +130,7 @@ principle that enables us to address requirements that occur in the future, even
 - Ideally, a new requirement should be only necessitate the addition of a new class, with no changes to other already-existing classes of the system.
 This is commonly known as the  OPEN/CLOSE Principle.
 
-- CONSTRUCTOR INJECTION is the act of statically defining the list of required DEPENDENCIES by specifying them a saprameters to the class's constructor.
+- CONSTRUCTOR INJECTION is the act of statically defining the list of required DEPENDENCIES by specifying them as parameters to the class's constructor.
 
 Benefits of DI:
 
