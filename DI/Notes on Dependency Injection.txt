@@ -142,3 +142,32 @@ Maintainability	        |   Classes with clearly defined responsibilities are ea
 Testability	            |   Classes can be unit tested.	                                            |   Always valuable.
 
 - LATE BINDING
+- Extensibility
+- PARALLEL development
+- MAINTAINABILITY
+- TESTABILITY
+    - An application is considered TESTABLE when it can be unit tested.
+    - It is only possible to write unit tests when the unit in question can be properly isolated from its DEPENDENCIES.
+    
+- It's not even particularly difficult to implement DI. We program against interfaces, not concrete implementations. The only major obstacle is to figure 
+out how to get hold of instances of those interfaces. DI surmounts this obstacle by injecting the DEPENDENCIES from the outside. CONSTRUCTOR INJECTION
+is the preferred method of doing that.
+
+VOLATILE DEPENDENCIES
+- The DEPENDENCY introduces a requirement to set up and configure a runtime environment for the applications. It isn't so much the concrete types that
+are volatile, but rather what they imply about the runtime environment. Databases are good examples of BCL types that are VOLATILE DEPENDENCIES, and 
+relational databases are the archetypical example. If you don't hide a relational database behind a SEAM, you can never replace it by any other technology.
+It also makes it hard to set up and run automated unit tests. (Even though the MSSQL Server client library is a technology contained in the BCL its usage 
+implies a relational database.) Other out-of-process resources like message queues, web services, and even the filesystem fall into this category. The 
+symptoms of this type of DEPENDENCY are lack of late binding and extensibility, as well as disabled TESTABILITY. 
+
+- The DEPENDENCY doesn't yet exist, or is still in development.
+- The DEPENDENCY isn't installed on all machines in the development organization. This may be the case for expensive third-party libraries or DEPENDENCIES 
+that can't be installed on all operating systems. The most common symptom is disabled TESTABILITY.
+- The DEPENDENCY contains nondeterministic behavior. This is particularly important in unit tests because all tests must be deterministic. Typical sources
+of non-determinism are random numbers and algorithms that depende on the current data or time. This type of DEPENDENCIES destroys TESTABILITY.
+
+VOLATILE DEPENDENCIES are the focal point of DI. It's for VOLATILE DEPENDENCIES rather than STABLE DEPENDENCIES that you introduce SEAMS into your application.
+Again, this obligates you to compose them using DI.
+
+A DI CONTAINER could be VOLATILE. Only the entry point should reference the DI CONTAINER.
