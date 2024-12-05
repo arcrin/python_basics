@@ -111,7 +111,11 @@ In your application, DI would reduce boilerplate, improve modularity, and make t
 While it might seem like additional complexity initially, it pays off as the system grows.
 
 
+----------------------------------------------------------------------------------------------------------------------------------
+
 Notes from Dependency Injection Principle, Practices, and Patterns.
+
+Chapter 1
 
 - Dependency Injection is a set of software design principles and patterns that enables you to develop loosely coupled code.
 - PURE DI is the practice of applying DI without DI CONTAINER
@@ -143,6 +147,7 @@ Testability	            |   Classes can be unit tested.	                        
 
 - LATE BINDING
 - Extensibility
+    - usually done by wrappers of decorators
 - PARALLEL development
 - MAINTAINABILITY
 - TESTABILITY
@@ -165,9 +170,60 @@ symptoms of this type of DEPENDENCY are lack of late binding and extensibility, 
 - The DEPENDENCY isn't installed on all machines in the development organization. This may be the case for expensive third-party libraries or DEPENDENCIES 
 that can't be installed on all operating systems. The most common symptom is disabled TESTABILITY.
 - The DEPENDENCY contains nondeterministic behavior. This is particularly important in unit tests because all tests must be deterministic. Typical sources
-of non-determinism are random numbers and algorithms that depende on the current data or time. This type of DEPENDENCIES destroys TESTABILITY.
+of non-determinism are random numbers and algorithms that depends on the current data or time. This type of DEPENDENCIES destroys TESTABILITY.
 
 VOLATILE DEPENDENCIES are the focal point of DI. It's for VOLATILE DEPENDENCIES rather than STABLE DEPENDENCIES that you introduce SEAMS into your application.
 Again, this obligates you to compose them using DI.
 
 A DI CONTAINER could be VOLATILE. Only the entry point should reference the DI CONTAINER.
+
+DI Scope
+By utilizing DI, developers give up Object Composition (creating instances of dependencies inside the consumer) and dependency life cycle management.
+DI in three dimensions
+- Object Composition
+- Object Lifetime
+- Interception
+    - This is where extendability happens, most likely with wrappers and decorators.
+
+Although DI started out as a series of patterns aimed at solving the problem of OBJECT COMPOSITION, the term has subsequently expanded to also cover 
+OBJECT LIFETIME and INTERCEPTION. Today, we think of DI as encompassing all three in a consistent way.
+OBJECT COMPOSITION tends to dominate the picture because, without flexible OBJECT COMPOSITION, there'd be no INTERCEPTION and not need to manage 
+OBJECT LIFETIME. OBJECT COMPOSITION provides the foundation, and LIFETIME MANAGEMENT addresses some important side effects. But it's mainly when it 
+comes to INTERCEPTION that you start to reap the benefits.
+
+Conclusion
+Dependency Injection is a means to an end, not a goal in itself. It's the best way to enable loose coupling, an important poart of maintainable code. 
+The benefits you can reap from loose coupling aren't always immediately apparent, but they'll become visible over time,  as the complexity of a code 
+base grows. An important point about loose coupling in relation to DI is that, in order to be effective, it should be everywhere in your code base.
+
+A tightly coupled code base will eventually deteriorate into Spaghetti Code; where as well-designed, loosely coupled code base can stay maintainable.
+It takes more than loose coupling to reach a truly supple design, but programming to interfaces is a prerequisite.
+
+DI is nothing more than a collection of design principles and patterns. It's more about a way of thinking and designing code than it is about tools and 
+techniques. The purpose of DI is to make code maintainable. Small code bases, like a classic Hello World example, are inherently maintainable because
+of their size. This is why DI tends to look like over-engineering in simple examples. The larger the code base becomes, the more visible the benefits.
+
+Summary of Chapter 1
+- Dependency Injection is a set of software design principles and patterns that enables loosely coupled code. Loose coupling makes code more maintainable.
+- When you have a loosely coupled infrastructure in place, it can be used by anyone and adapted to changing needs and unanticipated requirements without
+having to make large changes to the application's code base and its infrastructure.
+- Troubleshooting tends to become less taxing because the scope of likely culprits narrows.
+- DI enables late binding, which is the ability to replace classes or modules with different ones without the need for te original code to be recompiled. 
+- DI makes it easier for code to be extended and reused in ways not explicitly planned for, similar to the way you have flexibility when working with 
+electrical plugs and sockets.
+- DI simplifies parallel development on the same code base because the Separation of Concerns allows each team member or even entire teams to work more
+easily on isolated parts.
+- DI makes software more TESTABLE because you can replace DEPENDENCIES with test implementations when writing unit tests.
+- When you practice DI, collaborating classes should rely on infrastructure to provide the necessary services. You do this by letting your classes depend 
+on interfaces, instead of concrete implementations.
+- Classes shouldn't ask a third party for their DEPENDENCIES. This is an anti-pattern called SERVICE LOCATOR. Instead, classes should specify their required 
+DEPENDENCIES STATICALLY using constructor paramenters, a practice called CONSTRUCTOR INJECTION
+- DI CONTAINER is not a necessity.
+- One of the most important software design principles that enables DI is the LISKOV SUBSTITUTION PRINCIPLE. It allows replacing one implementation of an
+interface with another without breaking either the client or the implementation.
+- DEPENDENCIES are considered STABLE in the case that they're already available, have deterministic behavior, don't require a setup runtime environment 
+(such as a relational database), and don't need to be replaced, wrapped, or intercepted.
+- DEPENDENCIES are considered VOLATILE when they are under development, aren't always available on all development machines, contain nondeterministic
+behavior, or need to be replaced, wrapped, or intercepted.
+- VOLATILE DEPENDENCIES are the focal point of DI. We inject VOLATILE DEPENDENCIES into a class's constructor.
+- By removing control over DEPENDENCIES from their consumers, and moving that control into the application entry point, you gain the ability to apply
