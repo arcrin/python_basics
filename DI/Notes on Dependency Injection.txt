@@ -183,7 +183,7 @@ DI in three dimensions
 - Object Composition
 - Object Lifetime
 - Interception
-    - This is where extendability happens, most likely with wrappers and decorators.
+    - This is where extensibility happens, most likely with wrappers and decorators.
 
 Although DI started out as a series of patterns aimed at solving the problem of OBJECT COMPOSITION, the term has subsequently expanded to also cover 
 OBJECT LIFETIME and INTERCEPTION. Today, we think of DI as encompassing all three in a consistent way.
@@ -227,3 +227,12 @@ interface with another without breaking either the client or the implementation.
 behavior, or need to be replaced, wrapped, or intercepted.
 - VOLATILE DEPENDENCIES are the focal point of DI. We inject VOLATILE DEPENDENCIES into a class's constructor.
 - By removing control over DEPENDENCIES from their consumers, and moving that control into the application entry point, you gain the ability to apply
+
+
+Chapter 2 Writing tightly coupled code
+
+Single Responsibility Principle (SRP)
+- A class should have only one reason to change. More often than not, however, it can be more challenging to see whether a class has multiple reasons to 
+change. What often helps is to look at the SRP from the perspective of code cohesion. Cohesion is defined as the functional relatedness of the elements 
+of a class or module. The lower the relatedness, the lower the cohesion, and the higher the risk a class violates the SRP.
+
