@@ -147,7 +147,7 @@ Testability	            |   Classes can be unit tested.	                        
 
 - LATE BINDING
 - Extensibility
-    - usually done by wrappers of decorators
+    - usually done by wrappers or decorators
 - PARALLEL development
 - MAINTAINABILITY
 - TESTABILITY
