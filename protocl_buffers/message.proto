@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+message UserInputRequestMessage {
+    string id = 1;
+    string message = 2;
+    string prompot_type = 3;
+}
+
+message CommandMessage {
+    string command_type = 1;
+    map<string, string> payload = 2;
+}
