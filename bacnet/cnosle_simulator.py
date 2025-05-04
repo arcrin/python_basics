@@ -9,7 +9,7 @@ def clean_response(data: bytes) -> bytes:
 
 debug_uart = serial.Serial("COM38", baudrate=115200, timeout=2)
 
-def read_from_port(ser):
+def read_from_port(ser:serial.Serial) -> None:
     while True:
         response = debug_uart.read_until(b'#')
         response = clean_response(response)
