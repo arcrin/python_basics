@@ -21,7 +21,7 @@ class SerialConsole:
             if data:
                 with self.lock:
                     self.buffer.extend(data)
-
+# 
     def read_until_prompt(self, prompt:str='#', timeout:int=60, verbose:bool=False) -> str:
         prompt_bytes = prompt.encode()
         start = time.time()
@@ -101,7 +101,7 @@ def kill_process(console: SerialConsole, process_id:str) -> None:
 
 def redirect(console: SerialConsole, destination_dir: str) -> None:
     try:
-        wait_for_shell_prompt(console, "/usr/delta")
+        wait_for_shell_prompt(console, "")
         console.send(f"cd {destination_dir}")
         if not console.read_until_prompt(f"{destination_dir}#", timeout=3) :
             raise TimeoutError(f"Timeout waiting for redirect to {destination_dir}")
