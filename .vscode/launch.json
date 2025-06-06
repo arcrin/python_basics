@@ -11,6 +11,25 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": false
+        },
+        {
+            "name": "Python: FastAPI/Uvicorn",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn", // Use 'module' to run uvicorn
+            "args": [
+                "protobuf_sample:app",     // Replace 'main' with your file name and 'app' with your FastAPI app instance
+                "--host", "127.0.0.1",
+                "--port", "8000",
+                "--reload"      // Optional, but good for development
+                // Add "--workers", "1" if you have issues with breakpoints in multi-worker setups during debug
+            ],
+            "jinja": true, // If you use Jinja templates
+            "justMyCode": true, // Set to false if you need to debug into library code,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/pydantic_sample" // Ensure your workspace is in PYTHONPATH
+            },
+            "cwd": "${workspaceFolder}/pydantic_sample",
         }
     ],
     "tasks": [

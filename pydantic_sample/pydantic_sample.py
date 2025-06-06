@@ -1,3 +1,4 @@
+# type: ignore
 from pydantic import BaseModel, ValidationError
 from  typing import List, Optional
 

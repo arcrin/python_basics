@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package example;
+
+message Item {
+    int32 item_id = 1;
+    string item_name = 2;
+    optional string description = 3;
+    double price = 4;
+    int64 submission_timestamp_utc = 5;
+}
